@@ -1,12 +1,33 @@
 import sys
+from dataclasses import dataclass
+
+
+@dataclass
+class Flight:
+    departure: str
+    destination: str
+
+    def __str__(self):
+        return f'{self.departure} -> {self.destination}'
+
+    def __repr__(self):
+        return str(self)
+
+    @property
+    def is_safe(self):
+        ...
+
+    @is_safe.setter
+    def is_safe(self, arr: list[str]):
+        ...
 
 
 def parse_input(airports: list):  # -> dict, list
 
-    n_trips = int(airports[0][0])
+    n_trips: int = int(airports[0][0])
     check_safe = [i for arr in airports[n_trips + 1:] for i in arr]
 
-    flight_graph = {}
+    flight_graph: dict = {}
 
     for dep, des in airports[1:n_trips + 1]:
         if dep not in flight_graph:
